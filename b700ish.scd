@@ -31,7 +31,12 @@ FreqScope.new;
 ~levelAeno = 6; ~levelBeno = 7;
 ~filteno = 8; ~reseno = 9;
 
-"/Users/lanterma/buchla700_supercollider/b700ish_patches.scd".load;
+p = thisProcess.nowExecutingPath.dirname +/+ "b700ish_patches.scd";
+p.load;
+
+~imagePath = thisProcess.nowExecutingPath.dirname +/+ "images/fm_config_c_";
+// "/Users/lanterma/buchla700_supercollider/b700ish_patches.scd".load;
+
 if (~currentPatch.isNil,{~currentPatch=0});
 ~instruments[~currentPatch].value;
 
@@ -253,7 +258,7 @@ MIDIdef.noteOff(\noteOffTest, { arg velocity, noteNumber, chan, src;
 ~updateGUI = {
 ~cfimages = Array.fill(12,
 	{arg i;
-	 Image.new("/Users/lanterma/buchla700_supercollider/fm_config_c_"
+	 Image.new(~imagePath
 		++ i.asStringToBase(width: 2) ++ ".png"); });
 
  if(w.notNil,
